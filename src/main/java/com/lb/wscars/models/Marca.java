@@ -1,5 +1,6 @@
 package com.lb.wscars.models;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,9 @@ public class Marca {
 
     @Column(name = "nome_marca", length = 30)
     private String nome_marca;
+
+    @OneToMany(mappedBy = "marca_id")
+    private List<Modelo> modelos;
 
     public Marca() {
     }

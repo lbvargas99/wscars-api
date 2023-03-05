@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +24,9 @@ public class Carro {
     @Column(name = "timestamp_cadastro")
     private Date timestamp_cadastro;
 
-    @Column(name = "modelo_id")
-    private Long modelo_id;
+    @ManyToOne
+    @JoinColumn(name = "modelo_id")
+    private Modelo modelo_id;
 
     @Column(name = "ano")
     private Date ano;
@@ -40,7 +43,7 @@ public class Carro {
     public Carro() {
     }
 
-    public Carro(Long id, Date timestamp_cadastro, Long modelo_id, Date ano, int combustivel, int num_portas,
+    public Carro(Long id, Date timestamp_cadastro, Modelo modelo_id, Date ano, int combustivel, int num_portas,
             String cor) {
         this.id = id;
         this.timestamp_cadastro = timestamp_cadastro;
@@ -67,11 +70,11 @@ public class Carro {
         this.timestamp_cadastro = timestamp_cadastro;
     }
 
-    public Long getModelo_id() {
+    public Modelo getModelo_id() {
         return this.modelo_id;
     }
 
-    public void setModelo_id(Long modelo_id) {
+    public void setModelo_id(Modelo modelo_id) {
         this.modelo_id = modelo_id;
     }
 

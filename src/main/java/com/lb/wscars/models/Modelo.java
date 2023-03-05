@@ -1,5 +1,6 @@
 package com.lb.wscars.models;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,10 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Modelo")
+@Table(name = "modelo")
 public class Modelo {
 
     @Id
@@ -18,8 +22,9 @@ public class Modelo {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "marca_id")
-    private Long marca_id;
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
+    private Marca marca_id;
 
     @Column(name = "nome", length = 60)
     private String nome;
@@ -27,10 +32,13 @@ public class Modelo {
     @Column(name = "valor_fipe")
     private Long valor_fipe;
 
+    @OneToMany(mappedBy = "modelo_id")
+    private List<Carro> carros;
+
     public Modelo() {
     }
 
-    public Modelo(Long id, Long marca_id, String nome, Long valor_fipe) {
+    public Modelo(Long id, Marca marca_id, String nome, Long valor_fipe) {
         this.id = id;
         this.marca_id = marca_id;
         this.nome = nome;
@@ -45,11 +53,11 @@ public class Modelo {
         this.id = id;
     }
 
-    public Long getMarca_id() {
+    public Marca getMarca_id() {
         return this.marca_id;
     }
 
-    public void setMarca_id(Long marca_id) {
+    public void setMarca_id(Marca marca_id) {
         this.marca_id = marca_id;
     }
 
